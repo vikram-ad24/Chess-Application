@@ -26,6 +26,10 @@ public class Pawn extends Piece{
         {
             return true;
         }
+        if(fromRow==6&&toColumn==fromColumn && toRow==fromRow+direction-1 && square[toRow][toColumn]==null)
+        {
+            return true;
+        }
         if (Math.abs(toColumn - fromColumn) == 1 && toRow == fromRow + direction
                 && targetPiece != null && !targetPiece.color.equals(this.color)) {
             return true;

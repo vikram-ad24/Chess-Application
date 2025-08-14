@@ -1,6 +1,5 @@
 package com.chess.Controller;
 
-import com.chess.Pieces.Pawn;
 import com.chess.Pieces.Piece;
 import com.chess.Utility.Board;
 import com.chess.Utility.MoveRequest;
@@ -9,6 +8,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:5173",
                 allowCredentials = "true"
@@ -32,10 +34,8 @@ public class MovesController {
         Piece[][] squares = board.getSquare();   // full board
         Piece piece = squares[fromRow][fromColumn];
 
-//        if(piece instanceof Pawn) {
             if(piece.isValidMove(moveRequest,squares)) {
                 return board.moveThePiece(moveRequest);
-//            }
         }
         return board.getSquare();
     }
@@ -47,5 +47,25 @@ public class MovesController {
         Board newBoard= new Board();
         board.setSquare(newBoard.getSquare());
         return board.getSquare();
+    }
+
+    @MessageMapping("/hints")
+    @SendTo("/topic/hints")
+    public List<int[]> getMoves(MoveRequest request){
+
+        List<int[]> list=new ArrayList<>();
+        Piece[][] square=board.getSquare();
+        Piece piece=square[request.getFromRow()][request.getFromColumn()];
+
+        for(int i=0; i<square.length; i++){
+            for(int j=0; j<square[i].length; j++){
+                request.setToRow(i);
+                request.setToColumn(j);
+                if(piece.isValidMove(request,board.getSquare())){
+                    list.add(new int[]{i,j});
+                }
+            }
+        }
+        return list;
     }
 }

@@ -1,9 +1,6 @@
 package com.chess.Utility;
 
-import com.chess.Pieces.King;
-import com.chess.Pieces.Pawn;
-import com.chess.Pieces.Piece;
-import com.chess.Pieces.Rook;
+import com.chess.Pieces.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -28,23 +25,23 @@ public class Board {
         square[0][7] = new Rook("white");
         square[7][0] = new Rook("black");
         square[7][7] = new Rook("black");
-//
-//        // 3️⃣ Knights
-//        square[0][1] = new Knight("white");
-//        square[0][6] = new Knight("white");
-//        square[7][1] = new Knight("black");
-//        square[7][6] = new Knight("black");
-//
-//        // 4️⃣ Bishops
-//        square[0][2] = new Bishop("white");
-//        square[0][5] = new Bishop("white");
-//        square[7][2] = new Bishop("black");
-//        square[7][5] = new Bishop("black");
-//
-//        // 5️⃣ Queens
-//        square[0][3] = new Queen("white");
-//        square[7][3] = new Queen("black");
-//
+
+        // 3️⃣ Knights
+        square[0][1] = new Knight("white");
+        square[0][6] = new Knight("white");
+        square[7][1] = new Knight("black");
+        square[7][6] = new Knight("black");
+
+        // 4️⃣ Bishops
+        square[0][2] = new Bishop("white");
+        square[0][5] = new Bishop("white");
+        square[7][2] = new Bishop("black");
+        square[7][5] = new Bishop("black");
+
+        // 5️⃣ Queens
+        square[0][3] = new Queen("white");
+        square[7][3] = new Queen("black");
+
         // 6️⃣ Kings
         square[0][4] = new King("white");
         square[7][4] = new King("black");
